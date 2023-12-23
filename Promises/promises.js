@@ -22,3 +22,35 @@ let promise2 = new Promise((resolve, reject) => {
 });
 
 console.log(promise2);
+
+
+// Real Time example with promises and XMLHttpRequest
+
+// producing code for promise
+let promise = new Promise(function(resolved,rejected) {
+
+    let xhr = new XMLHttpRequest();
+    // xhr.open('GET','../data.txt',true);
+    xhr.open('GET','../dataAA.txt',true);
+    xhr.send();
+
+    xhr.onload = function() {
+        if(xhr.statusText === 'OK'){
+            resolved(xhr.responseText);
+        }else{
+            rejected("File Not found or Somwthing wrong");
+        }
+    }
+});
+
+// code for consuming promise data and handling rejected data
+promise.then(function(data){
+    console.log(data);
+}, function(error){
+    console.log(error);
+});
+
+// to catch only error
+promise.catch(function(error){
+    console.log(error);
+});
